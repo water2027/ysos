@@ -19,6 +19,8 @@ pub fn open_file(path: &str) -> RegularFile {
     let mut buf = [0; 64];
     let cstr_path = uefi::CStr16::from_str_with_buf(path, &mut buf).unwrap();
 
+    info!("{}", path);
+
     let handle = open_root()
         .open(cstr_path, FileMode::Read, FileAttribute::empty())
         .expect("Failed to open file");
